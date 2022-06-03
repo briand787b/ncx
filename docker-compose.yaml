@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  ide:
+    image: node:16.5
+    volumes:
+      - ${PWD}/src/ui/ide:/app
+    working_dir: /app
+    command: npm run dev
+    ports:
+      - 3000:3000
