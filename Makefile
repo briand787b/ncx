@@ -7,6 +7,6 @@ build-ide:
         -t ghcr.io/briand787b/ncx-ide:latest \
 		src/ui/ide
 
-push-ide: 
-	docker push "ghcr.io/briand787b/ncx-ide:$(SHORT_SHA)"
-    docker push "ghcr.io/briand787b/ncx-ide:latest"
+push-ide:
+	docker push ghcr.io/briand787b/ncx-ide:$(SHORT_SHA) && \
+    docker push ghcr.io/briand787b/ncx-ide:latest
