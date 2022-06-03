@@ -3,8 +3,10 @@ name: Push IDE Changes to Master
 on:
   push:
     branches: [master]
-    paths: 
+    paths:
       - 'src/ui/ide/**'
+      - Makefile
+      - docker-compose.yaml
     
 jobs:
   docker-publish:
