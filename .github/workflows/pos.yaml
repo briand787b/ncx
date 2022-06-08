@@ -1,4 +1,4 @@
-name: Push IDE Changes to Master
+name: PoS CI
 
 on:
   pull_request:

@@ -18,7 +18,7 @@ build-pos:
 		-f src/ui/ide/Dockerfile \
 		-t "ghcr.io/briand787b/ncx-pos:$(SHORT_SHA)" \
         -t ghcr.io/briand787b/ncx-pos:latest \
-		src/ui/ide
+		src/ui/pos
 
 push-pos:
 	docker push ghcr.io/briand787b/ncx-pos:$(SHORT_SHA) && \
