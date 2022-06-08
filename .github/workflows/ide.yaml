@@ -1,15 +1,15 @@
-name: PoS CI
+name: IDE CI
 
 on:
   pull_request:
     paths:
-      - 'src/ui/pos/**'
+      - 'src/ui/ide/**'
       - Makefile
       - docker-compose.yaml
   push:
     branches: [master]
     paths:
-      - 'src/ui/pos/**'
+      - 'src/ui/ide/**'
       - Makefile
       - docker-compose.yaml
     
@@ -29,7 +29,7 @@ jobs:
 
       - id: build
         name: Build Production Docker Image
-        run: make build-pos
+        run: make build-ide
 
       - name: Docker Build Status
         if: steps.build.outcome == 'failure'
@@ -37,4 +37,4 @@ jobs:
 
       - name: Publish Production Docker Image
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: make push-pos
+        run: make push-ide
