@@ -9,3 +9,11 @@ services:
     command: npm run dev
     ports:
       - 3000:3000
+  pos:
+    image: node:16.5
+    volumes:
+      - ${PWD}/src/ui/pos:/app
+    working_dir: /app
+    command: npm run dev
+    ports:
+      - 3001:3000
