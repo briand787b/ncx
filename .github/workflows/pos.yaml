@@ -1,0 +1,40 @@
+name: Push IDE Changes to Master
+
+on:
+  pull_request:
+    paths:
+      - 'src/ui/pos/**'
+      - Makefile
+      - docker-compose.yaml
+  push:
+    branches: [master]
+    paths:
+      - 'src/ui/pos/**'
+      - Makefile
+      - docker-compose.yaml
+    
+jobs:
+  docker-publish:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: build
+        name: Build Production Docker Image
+        run: make build-pos
+
+      - name: Docker Build Status
+        if: steps.build.outcome == 'failure'
+        run: exit 1
+
+      - name: Publish Production Docker Image
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: make push-pos
