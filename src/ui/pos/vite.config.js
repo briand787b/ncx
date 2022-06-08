@@ -10,6 +10,7 @@ export default defineConfig({
     },
   },
   server: {
-    open: true,
+    // This has to be 'false' to work in Docker
+    open: false,
   },
 })
