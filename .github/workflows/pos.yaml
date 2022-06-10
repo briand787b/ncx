@@ -68,6 +68,11 @@ jobs:
       - name: Print Out New Manifest
         run: cat charts/ncx-pos/values.yaml
 
+      - name: Git Config
+        run: |
+          git config --global user.email ncxbot@example.com
+          git config --global user.name NCXBot
+
       - name: Commit Changes
         run: |
           git commit -am "update container for production release ncx-$NCX_APP $SHORT_SHA"
