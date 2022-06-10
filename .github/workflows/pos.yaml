@@ -41,6 +41,7 @@ jobs:
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: make push-pos
 
+  # TODO: Make this reusable
   infra:
     needs: docker
     # TODO: UNCOMMENT THIS CODE WHEN FINISHED PLAYING WITH CI/CD
@@ -56,4 +57,12 @@ jobs:
           repository: 'briand787b/ncx-infra'
 
       - name: Checkout Feature Branch
-        run: git checkout -b release-pos-${{ env.SHORT_SHA }}
+        run: git checkout -b release-pos-${SHORT_SHA}
+      
+      - name: Modify Infra PoS Image
+        env:
+          NCX_APP: pos
+        run: ./update-tag.sh
+
+      - name: Print Out New Manifest
+        run: cat charts/ncx-pos/values.yaml
