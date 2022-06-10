@@ -61,6 +61,11 @@ jobs:
         run: |
           sed -i 's/tag:.*$/tag: '"$SHORT_SHA"'/g' charts/ncx-$NCX_APP/values.yaml
           cat charts/ncx-pos/values.yaml
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          title: Automatic pull request
       - name: Push Changes to IaC Repo
         run: |
           git config user.name github-actions
