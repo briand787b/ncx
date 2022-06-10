@@ -41,7 +41,7 @@ jobs:
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: make push-pos
 
-  update-infra:
+  infra:
     needs: docker
     # TODO: UNCOMMENT THIS CODE WHEN FINISHED PLAYING WITH CI/CD
     # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
