@@ -62,7 +62,8 @@ jobs:
       - name: Modify Infra PoS Image
         env:
           NCX_APP: pos
-        run: ./update-tag.sh
+        run: |
+          sed -i 's/tag:.*$/tag: '"$SHORT_SHA"'/g' charts/ncx-$NCX_APP/values.yaml
 
       - name: Print Out New Manifest
         run: cat charts/ncx-pos/values.yaml
