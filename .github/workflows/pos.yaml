@@ -79,4 +79,8 @@ jobs:
 
       - name: Git Rebase
         run: |
-          git pull --rebase https://briand787b/ncx-infra master
+          git pull --rebase https://github.com/briand787b/ncx-infra master
+
+      - name: Git Fork
+        run: |
+          hub fork --remote-name=origin
