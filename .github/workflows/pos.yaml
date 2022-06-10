@@ -47,10 +47,13 @@ jobs:
     # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - name: Add SHORT_SHA Env Var
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+
       - name: Clone Infra Repo
         uses: actions/checkout@v3
         with:
           repository: 'briand787b/ncx-infra'
 
       - name: Checkout Feature Branch
-        run: git checkout -b release-pos-${{ GITHUB_SHA }}
+        run: git checkout -b release-pos-${{ SHORT_SHA }}
