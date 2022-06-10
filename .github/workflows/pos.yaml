@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: 'briand787b/ncx-infra'
-        run: |
+      - run: |
           sed -i 's/tag:.*$/tag: '"$SHORT_SHA"'/g' charts/ncx-$NCX_APP/values.yaml
           cat charts/ncx-pos/values.yaml
           git config user.name github-actions
