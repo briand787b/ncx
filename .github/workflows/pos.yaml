@@ -56,4 +56,4 @@ jobs:
           repository: 'briand787b/ncx-infra'
 
       - name: Checkout Feature Branch
-        run: git checkout -b release-pos-${{ SHORT_SHA }}
+        run: git checkout -b release-pos-${{ env.SHORT_SHA }}
