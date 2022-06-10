@@ -47,6 +47,8 @@ jobs:
     # TODO: UNCOMMENT THIS CODE WHEN FINISHED PLAYING WITH CI/CD
     # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    env:
+      NCX_APP: pos
     steps:
       - name: Add SHORT_SHA Env Var
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
@@ -60,10 +62,16 @@ jobs:
         run: git checkout -b release-pos-${SHORT_SHA}
       
       - name: Modify Infra PoS Image
-        env:
-          NCX_APP: pos
         run: |
           sed -i 's/tag:.*$/tag: '"$SHORT_SHA"'/g' charts/ncx-$NCX_APP/values.yaml
 
       - name: Print Out New Manifest
         run: cat charts/ncx-pos/values.yaml
+
+      - name: Commit Changes
+        run: |
+          git commit -am "update container for production release ncx-$NCX_APP $SHORT_SHA"
+
+      - name: Git Rebase
+        run: |
+          git pull --rebase https://briand787b/ncx-infra master
