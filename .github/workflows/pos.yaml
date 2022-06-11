@@ -114,3 +114,4 @@ jobs:
         run: git pull --rebase https://github.com/briand787b/ncx-infra master
 
       - name: Push Changes to IaC Repo
+        run: git push origin master
