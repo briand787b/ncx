@@ -97,7 +97,7 @@ jobs:
       - name: update gitops
         uses: denispalnitsky/gitops-release@v9
         with:
-          file: "charts/ncx-pos/values.yaml"
+          filename: "charts/ncx-pos/values.yaml"
           key: "tag"
           value: ${{ github.ref }}
           github-token: ${{ secrets.GIT_ACCESS_TOKEN }}
