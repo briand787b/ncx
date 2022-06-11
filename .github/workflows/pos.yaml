@@ -88,6 +88,7 @@ jobs:
     steps:
       - name: Store SSH Key
         run: |
+          mkdir -p ~/.ssh
           echo ${{secrets.SSH_PUB_KEY}} > ~/.ssh/id_rsa.pub
           echo ${{secrets.SSH_KEY}} > ~/.ssh/id_rsa
 
