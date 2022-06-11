@@ -42,45 +42,9 @@ jobs:
         run: make push-pos
 
   # TODO: Make this reusable
-  infra:
-    if: 'false'
-    needs: docker
-    # TODO: UNCOMMENT THIS CODE WHEN FINISHED PLAYING WITH CI/CD
-    # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    env:
-      NCX_APP: pos
-      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    steps:
-      - name: Add SHORT_SHA Env Var
-        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
-
-      - name: Clone Infra Repo
-        uses: actions/checkout@v3
-        with:
-          repository: 'briand787b/ncx-infra'
-      - name: Update IaC Image Tag
-        run: |
-          sed -i 's/tag:.*$/tag: '"$SHORT_SHA"'/g' charts/ncx-$NCX_APP/values.yaml
-          cat charts/ncx-pos/values.yaml
-
-      - name: Configure Git    
-        run: |
-          git config user.name gitops-bot
-          git config user.email gitops-bot@ncx.com
-
-      - name: Commit Changes
-        run: git commit -am "update container for production release ncx-$NCX_APP $SHORT_SHA"
-
-      - name: Pull Down Any Changes Since Cloning
-        run: git pull --rebase https://github.com/briand787b/ncx-infra master
-
-      - name: Push Changes to IaC Repo
-        run: git push origin master
   deploy:
-    # needs: docker
-    # TODO: UNCOMMENT THIS CODE WHEN FINISHED PLAYING WITH CI/CD
-    # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    needs: docker
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     env:
       NCX_APP: pos
@@ -97,7 +61,7 @@ jobs:
       - name: update gitops
         uses: denispalnitsky/gitops-release@v9
         with:
-          filename: "charts/ncx-pos/values.yaml"
+          filename: "charts/ncx-${NCX_APP}/values.yaml"
           key: "tag"
           value: $SHORT_SHA
           github-token: ${{ secrets.GIT_ACCESS_TOKEN }}
