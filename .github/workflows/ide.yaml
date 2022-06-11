@@ -6,12 +6,14 @@ on:
       - 'src/ui/ide/**'
       - Makefile
       - docker-compose.yaml
+      - .github/workflows/pos.yaml
   push:
     branches: [master]
     paths:
       - 'src/ui/ide/**'
       - Makefile
       - docker-compose.yaml
+      - .github/workflows/pos.yaml
     
 jobs:
   docker:
