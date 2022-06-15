@@ -6,6 +6,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const app = createApp(App)
 
+const conf = config();
+console.log('build server address: ', conf.buildServerAddress);
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
