@@ -19,7 +19,7 @@ local-ide: build-ide
 ########## POS ##########
 build-pos: 
 	docker build \
-		-f src/ui/ide/Dockerfile \
+		-f src/ui/pos/Dockerfile \
 		-t "ghcr.io/briand787b/ncx-pos:$(SHORT_SHA)" \
         -t ghcr.io/briand787b/ncx-pos:latest \
 		src/ui/pos
