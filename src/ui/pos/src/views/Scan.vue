@@ -22,7 +22,7 @@
         <div class="bg-indigo-500 py-2 mt-2 h-36 md:h-24 flex-none">
           <h3>Subtotal: {{ subtotal }}</h3>
           <div class="mt-2 flex flex-col items-center md:flex-row md:justify-center">
-            <button class="bg-red-500 p-2 m-1 w-40">Cancel</button>
+            <button class="bg-red-500 p-2 m-1 w-40" @click="cancel">Cancel</button>
             <button class="bg-lime-500 p-2 m-1 w-40">Pay</button>
           </div>
         </div>
@@ -39,10 +39,14 @@ export default {
       const item = this.forSaleItems.filter(fsItem => fsItem.id === id)[0]
       this.cartItems.push(item);
     },
+    cancel() {
+      this.cartItems = [];
+    },
   },
   computed: {
     subtotal() {
-      return this.cartItems.reduce(((prev, curr) => curr.msrpCents + prev), 0)
+      const subTCents = this.cartItems.reduce(((prev, curr) => curr.msrpCents + prev), 0);
+      return "$" + (subTCents / 100).toFixed(2);
     },
   },
   mounted() {
