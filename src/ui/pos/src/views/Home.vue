@@ -11,19 +11,17 @@
             }}</div>
         </div>
       </div>
-      <div
-        class="w-full text-center border-2 border-solid border-slate-500 mt-5 md:mt-0 md:ml-1 md:h-full md:flex md:flex-col md:justify-between">
-        <div class="bg-sky-600 md:h-1/10 lg:1/5">
-          <h2>Total</h2>
-        </div>
-        <ul class="md:h-7/10 md:flex md:flex-col md:justify-start md:overflow-scroll">
+      <div class="w-full text-center border-2 border-solid border-slate-500 
+          mt-5 md:mt-0 md:ml-1 md:h-full md:flex md:flex-col md:justify-between">
+        <h2 class="bg-sky-600 h-14 flex-none pt-2">Total</h2>
+        <ul class="flex flex-col grow justify-start overflow-scroll">
           <li v-for="item in cartItems">{{ item.displayName }} {{ item.msrpCents }}</li>
         </ul>
-        <div class="bg-indigo-500 mt-2 md:h-1/5">
+        <div class="bg-indigo-500 py-2 mt-2 h-36 md:h-24 flex-none">
           <h3>Subtotal: {{ subtotal }}</h3>
-          <div>
-            <button class="bg-red-500">Cancel</button>
-            <button class="bg-lime-500">Pay</button>
+          <div class="mt-2 flex flex-col items-center md:flex-row md:justify-center">
+            <button class="bg-red-500 p-2 m-1 w-40">Cancel</button>
+            <button class="bg-lime-500 p-2 m-1 w-40">Pay</button>
           </div>
         </div>
       </div>
