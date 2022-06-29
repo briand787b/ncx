@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-gray-50">
+  <div class="bg-gray-50 md:h-full">
     <div
-      class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:flex  lg:justify-between lg:py-16 lg:px-8 border-solid border-2 border-indigo-600">
-      <div class="w-full text-center border-2 border-solid border-slate-500 md:mr-1">
+      class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:flex lg:justify-between lg:py-16 lg:px-8 border-solid border-2 border-indigo-600 md:h-full">
+      <div class="w-full text-center border-2 border-solid border-slate-500 md:mr-1 md:h-full md:overflow-scroll">
         <h2>Items List</h2>
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div v-for="item in forSaleItems" :key="item.id" @click="addToCart" :id="item.id"
@@ -11,12 +11,21 @@
             }}</div>
         </div>
       </div>
-      <div class="w-full text-center border-2 border-solid border-slate-500 mt-5 md:mt-0 md:ml-1">
-        <h2>Total</h2>
-        <ul>
+      <div
+        class="w-full text-center border-2 border-solid border-slate-500 mt-5 md:mt-0 md:ml-1 md:h-full md:flex md:flex-col md:justify-between">
+        <div class="bg-sky-600 md:h-1/10 lg:1/5">
+          <h2>Total</h2>
+        </div>
+        <ul class="md:h-7/10 md:flex md:flex-col md:justify-start md:overflow-scroll">
           <li v-for="item in cartItems">{{ item.displayName }} {{ item.msrpCents }}</li>
         </ul>
-        <h3>Subtotal: {{ subtotal }}</h3>
+        <div class="bg-indigo-500 mt-2 md:h-1/5">
+          <h3>Subtotal: {{ subtotal }}</h3>
+          <div>
+            <button class="bg-red-500">Cancel</button>
+            <button class="bg-lime-500">Pay</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
