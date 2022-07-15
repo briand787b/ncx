@@ -6,21 +6,21 @@
       <div class="w-full text-center border-2 border-solid 
         border-slate-500 lg:mr-1 lg:h-full lg:overflow-scroll">
         <h2>Items List</h2>
-        <div id="item-list" class="grid grid-cols-1 md:grid-cols-2">
-          <div v-for="item in forSaleItems" :key="item.id" @click="addToCart" :id="item.id" class="bg-gray-100 px-1 py-4 m-1 border-2 border-solid border-lime-500 
+        <ul id="item-list" class="grid grid-cols-1 md:grid-cols-2">
+          <li v-for="item in forSaleItems" :key="item.id" @click="addToCart" :id="item.id" class="bg-gray-100 px-1 py-4 m-1 border-2 border-solid border-lime-500 
               hover:bg-sky-700 cursor-pointer active:bg-indigo-800">
             {{ item.displayName
-            }}</div>
-        </div>
+            }}</li>
+        </ul>
       </div>
       <div class="w-full text-center border-2 border-solid border-slate-500 
           mt-5 lg:mt-0 lg:ml-1 lg:h-full md:flex md:flex-col md:justify-between">
         <h2 class="bg-sky-600 h-14 flex-none pt-2">Total</h2>
-        <ul class="flex flex-col grow justify-start overflow-scroll">
+        <ul id="total-list" class="flex flex-col grow justify-start overflow-scroll">
           <li v-for="item in cartItems">{{ item.displayName }} {{ item.msrpCents }}</li>
         </ul>
         <div class="bg-indigo-500 py-2 mt-2 h-36 md:h-24 flex-none">
-          <h3>Subtotal: {{ subtotal }}</h3>
+          <h3 id="subtotal">Subtotal: {{ subtotal }}</h3>
           <div class="mt-2 flex flex-col items-center md:flex-row md:justify-center">
             <button class="bg-red-500 p-2 m-1 w-40" @click="cancel">Cancel</button>
             <button class="bg-lime-500 p-2 m-1 w-40">Pay</button>
