@@ -46,7 +46,7 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     env:
-      NCX_APP: ide
+      NCX_APP: gateway
       GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
       - name: Add SHORT_SHA Env Var
