@@ -1,0 +1,69 @@
+name: Gateway CI
+
+on:
+  pull_request:
+    paths:
+      - 'src/svc/gateway/**'
+      - Makefile
+      - docker-compose.yaml
+      - .github/workflows/gateway.yaml
+  push:
+    branches: [master]
+    paths:
+      - 'src/svc/gateway/**'
+      - Makefile
+      - docker-compose.yaml
+      - .github/workflows/gateway.yaml
+    
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: build
+        name: Build Production Docker Image
+        run: make build-gateway
+
+      - name: Docker Build Status
+        if: steps.build.outcome == 'failure'
+        run: exit 1
+
+      - name: Publish Production Docker Image
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: make push-gateway
+  # TODO: Make this reusable
+  deploy:
+    needs: docker
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      NCX_APP: gateway
+      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - name: Add SHORT_SHA Env Var
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+
+      - name: Clone Infra Repo
+        uses: actions/checkout@v3
+        with:
+          repository: 'briand787b/ncx-infra'
+
+      - name: update gitops
+        uses: denispalnitsky/gitops-release@v9
+        with:
+          filename: "charts/ncx-${NCX_APP}/values.yaml"
+          key: "tag"
+          value: $SHORT_SHA
+          github-token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          github-org-and-repo:  "briand787b/ncx-infra"
+          github-username: gitops-user
+          github-user-mail: bot@example.com

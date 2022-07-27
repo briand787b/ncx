@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  ide:
+  ide-ui:
     image: node:16.5
     volumes:
       - ${PWD}/src/ui/ide:/app
@@ -9,7 +9,7 @@ services:
     command: npm run dev
     ports:
       - 3000:3000
-  pos:
+  pos-ui:
     image: node:16.5
     volumes:
       - ${PWD}/src/ui/pos:/app
@@ -17,3 +17,7 @@ services:
     command: npm run dev
     ports:
       - 3001:3000
+  gateway:
+    image: gateway
+    build:
+      context: src/svc/gateway

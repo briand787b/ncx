@@ -1,5 +1,21 @@
 SHORT_SHA=$(shell git rev-parse --verify --short=8 HEAD)
 
+########## Gateway ##########
+build-gateway: 
+	docker build \
+		-f src/svc/gateway/Dockerfile \
+		-t "ghcr.io/briand787b/ncx-gateway:$(SHORT_SHA)" \
+        -t ghcr.io/briand787b/ncx-gateway:latest \
+		src/svc/gateway
+
+push-gateway:
+	docker push ghcr.io/briand787b/ncx-gateway:$(SHORT_SHA) && \
+    docker push ghcr.io/briand787b/ncx-gateway:latest
+
+local-gateway: build-gateway
+	docker tag ghcr.io/briand787b/ncx-gateway localhost:32000/briand787b/ncx-gateway
+	docker push localhost:32000/briand787b/ncx-gateway
+
 ########## IDE ##########
 build-ide: 
 	docker build \
