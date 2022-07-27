@@ -1,4 +1,4 @@
-name: IDE CI
+name: Gateway CI
 
 on:
   pull_request:
