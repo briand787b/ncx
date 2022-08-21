@@ -1,20 +1,36 @@
 SHORT_SHA=$(shell git rev-parse --verify --short=8 HEAD)
 
-########## Gateway ##########
-build-gateway: 
+########## Store Gateway ##########
+build-gateway-store: 
 	docker build \
-		-f src/svc/gateway/Dockerfile \
-		-t "ghcr.io/briand787b/ncx-gateway:$(SHORT_SHA)" \
-        -t ghcr.io/briand787b/ncx-gateway:latest \
+		-f src/svc/gateway-store/Dockerfile \
+		-t "ghcr.io/briand787b/ncx-gateway-store:$(SHORT_SHA)" \
+        -t ghcr.io/briand787b/ncx-gateway-store:latest \
 		src/svc
 
-push-gateway:
-	docker push ghcr.io/briand787b/ncx-gateway:$(SHORT_SHA) && \
-    docker push ghcr.io/briand787b/ncx-gateway:latest
+push-gateway-store:
+	docker push ghcr.io/briand787b/ncx-gateway-store:$(SHORT_SHA) && \
+    docker push ghcr.io/briand787b/ncx-gateway-store:latest
 
-local-gateway: build-gateway
-	docker tag ghcr.io/briand787b/ncx-gateway localhost:32000/briand787b/ncx-gateway
-	docker push localhost:32000/briand787b/ncx-gateway
+local-gateway-store: build-gateway-store
+	docker tag ghcr.io/briand787b/ncx-gateway-store localhost:32000/briand787b/ncx-gateway-store
+	docker push localhost:32000/briand787b/ncx-gateway-store
+
+########## Web Gateway ##########
+build-gateway-web: 
+	docker build \
+		-f src/svc/gateway-web/Dockerfile \
+		-t "ghcr.io/briand787b/ncx-gateway-web:$(SHORT_SHA)" \
+        -t ghcr.io/briand787b/ncx-gateway-web:latest \
+		src/svc
+
+push-gateway-web:
+	docker push ghcr.io/briand787b/ncx-gateway-web:$(SHORT_SHA) && \
+    docker push ghcr.io/briand787b/ncx-gateway-web:latest
+
+local-gateway-web: build-gateway-web
+	docker tag ghcr.io/briand787b/ncx-gateway-web localhost:32000/briand787b/ncx-gateway-web
+	docker push localhost:32000/briand787b/ncx-gateway-web
 
 ########## IDE ##########
 build-ide: 
