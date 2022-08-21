@@ -6,7 +6,7 @@ build-gateway:
 		-f src/svc/gateway/Dockerfile \
 		-t "ghcr.io/briand787b/ncx-gateway:$(SHORT_SHA)" \
         -t ghcr.io/briand787b/ncx-gateway:latest \
-		src/svc/gateway
+		src/svc
 
 push-gateway:
 	docker push ghcr.io/briand787b/ncx-gateway:$(SHORT_SHA) && \
@@ -47,3 +47,7 @@ push-pos:
 local-pos: build-pos
 	docker tag ghcr.io/briand787b/ncx-pos localhost:32000/briand787b/ncx-pos
 	docker push localhost:32000/briand787b/ncx-pos
+
+########## UTILITIES ##########
+js-exec-vol:
+	docker-compose run $(shell [[ $(SVC) =~ '-ui' ]] && echo $(SVC) || echo $(SVC)-ui) /bin/bash

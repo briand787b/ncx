@@ -20,4 +20,5 @@ services:
   gateway:
     image: gateway
     build:
-      context: src/svc/gateway
+      context: src/svc
+      dockerfile: gateway/Dockerfile
