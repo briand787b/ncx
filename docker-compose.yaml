@@ -9,6 +9,8 @@ services:
     command: npm run dev
     ports:
       - 3000:3000
+    networks:
+      - web
   pos-ui:
     image: node:16.5
     volumes:
@@ -17,8 +19,24 @@ services:
     command: npm run dev
     ports:
       - 3001:3000
-  gateway:
+    networks:
+      - store
+  gateway-store:
     image: gateway
     build:
       context: src/svc
       dockerfile: gateway/Dockerfile
+    networks:
+      - store
+  gateway-web:
+    image: gateway-web
+    build:
+      context: src/svc
+      dockerfile: gateway-web/Dockerfile
+    networks:
+      - web
+      - store
+
+networks:
+  store:
+  web:

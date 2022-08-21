@@ -1,19 +1,19 @@
-name: Gateway CI
+name: Gateway-Web CI
 
 on:
   pull_request:
     paths:
-      - 'src/svc/gateway/**'
+      - 'src/svc/gateway-web/**'
       - Makefile
       - docker-compose.yaml
-      - .github/workflows/gateway.yaml
+      - .github/workflows/gateway-web.yaml
   push:
     branches: [master]
     paths:
-      - 'src/svc/gateway/**'
+      - 'src/svc/gateway-web/**'
       - Makefile
       - docker-compose.yaml
-      - .github/workflows/gateway.yaml
+      - .github/workflows/gateway-web.yaml
     
 jobs:
   docker:
@@ -31,7 +31,7 @@ jobs:
 
       - id: build
         name: Build Production Docker Image
-        run: make build-gateway
+        run: make build-gateway-web
 
       - name: Docker Build Status
         if: steps.build.outcome == 'failure'
@@ -39,14 +39,14 @@ jobs:
 
       - name: Publish Production Docker Image
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: make push-gateway
+        run: make push-gateway-web
   # TODO: Make this reusable
   deploy:
     needs: docker
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     env:
-      NCX_APP: gateway
+      NCX_APP: gateway-web
       GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
       - name: Add SHORT_SHA Env Var

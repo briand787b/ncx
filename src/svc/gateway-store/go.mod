@@ -1,4 +1,4 @@
-module github.com/briand787b/ncx/src/svc/gateway
+module github.com/briand787b/ncx/src/svc/gateway-store
 
 go 1.18
 
