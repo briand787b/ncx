@@ -20,18 +20,15 @@ updates:
       interval: weekly
       time: '03:00'
     open-pull-requests-limit: 10
-    versioning-strategy: increase
   - package-ecosystem: gomod
     directory: 'src/svc/gateway-web'
     schedule: 
       interval: weekly
       time: '03:00'
     open-pull-requests-limit: 10
-    versioning-strategy: increase
   - package-ecosystem: gomod
     directory: 'src/svc/pkg'
     schedule: 
       interval: weekly
       time: '03:00'
     open-pull-requests-limit: 10
-    versioning-strategy: increase
