@@ -21,4 +21,4 @@ jobs:
         with:
           svc-name: gateway-store
         secrets:
-          gcloud-token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          git-access-token: ${{ secrets.GIT_ACCESS_TOKEN }}
