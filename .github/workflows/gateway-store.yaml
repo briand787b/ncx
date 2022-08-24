@@ -22,3 +22,4 @@ jobs:
           svc-name: gateway-store
         secrets:
           git-access-token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

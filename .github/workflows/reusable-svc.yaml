@@ -42,8 +42,6 @@ jobs:
     needs: docker
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.github-token }}
     steps:
       - name: Add SHORT_SHA Env Var
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
