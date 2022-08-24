@@ -1,5 +1,14 @@
 SHORT_SHA=$(shell git rev-parse --verify --short=8 HEAD)
 
+########## All Services ##########
+run:
+	docker-compose build
+	docker-compose up -d
+	docker-compose logs -f
+
+clean:
+	docker-compose down --remove-orphans
+
 ########## Store Gateway ##########
 build-gateway-store: 
 	docker build \
