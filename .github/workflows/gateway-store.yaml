@@ -17,7 +17,7 @@ on:
     
 jobs:
   docker:
-        uses: briand787b/ncx-infra/.github/workflows/reusable-helm.yaml@master
+        uses: briand787b/ncx/.github/workflows/reusable-svc.yaml@master
         with:
           svc-name: gateway-store
         secrets:
