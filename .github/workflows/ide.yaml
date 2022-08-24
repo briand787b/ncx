@@ -3,14 +3,14 @@ name: IDE CI
 on:
   pull_request:
     paths:
-      - 'src/svc/ide/**'
+      - 'src/ui/ide/**'
       - Makefile
       - .github/workflows/ide.yaml
       - .github/workflows/reusable-svc.yaml
   push:
     branches: [master]
     paths:
-      - 'src/svc/ide/**'
+      - 'src/ui/ide/**'
       - Makefile
       - .github/workflows/ide.yaml
       - .github/workflows/reusable-svc.yaml

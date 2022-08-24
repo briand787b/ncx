@@ -3,14 +3,14 @@ name: POS CI
 on:
   pull_request:
     paths:
-      - 'src/svc/pos/**'
+      - 'src/ui/pos/**'
       - Makefile
       - .github/workflows/pos.yaml
       - .github/workflows/reusable-svc.yaml
   push:
     branches: [master]
     paths:
-      - 'src/svc/pos/**'
+      - 'src/ui/pos/**'
       - Makefile
       - .github/workflows/pos.yaml
       - .github/workflows/reusable-svc.yaml
