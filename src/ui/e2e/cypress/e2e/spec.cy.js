@@ -1,10 +1,12 @@
+// TODO: This is organized by frontend application, but it should be organized by business category
+
 describe('ide', () => {
   describe('home page', () => {
     it('should return to home page when clicking icon', () => {
       // arrange
       cy.visit('http://localhost:3000/')
       
-      // arrange
+      // act
       cy.get('h1').click()
   
       // assert
