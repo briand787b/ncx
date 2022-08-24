@@ -25,7 +25,7 @@ services:
     image: gateway
     build:
       context: src/svc
-      dockerfile: gateway/Dockerfile
+      dockerfile: gateway-store/Dockerfile
     networks:
       - store
   gateway-web:
