@@ -7,6 +7,7 @@ on:
       - Makefile
       - .github/workflows/gateway-store.yaml
       - .github/workflows/reusable-svc.yaml
+      - 'src/svc/pkg'
   push:
     branches: [master]
     paths:
