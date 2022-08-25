@@ -15,6 +15,7 @@ on:
       - Makefile
       - .github/workflows/gateway-web.yaml
       - .github/workflows/reusable-svc.yaml
+      - 'src/svc/pkg'
     
 jobs:
   docker:
