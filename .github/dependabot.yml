@@ -1,34 +1,53 @@
 version: 2
 updates:
+  # IDE
   - package-ecosystem: npm
     directory: 'src/ui/ide'
     schedule: 
       interval: weekly
-      time: '03:00'
     open-pull-requests-limit: 10
     versioning-strategy: increase
+  - package-ecosystem: docker
+    directory: 'src/ui/ide'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  # POS
   - package-ecosystem: npm
     directory: 'src/ui/pos'
     schedule: 
       interval: weekly
-      time: '03:00'
     open-pull-requests-limit: 10
     versioning-strategy: increase
+  - package-ecosystem: docker
+    directory: 'src/ui/pos'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  # Gateway (Store)
   - package-ecosystem: gomod
     directory: 'src/svc/gateway-store'
     schedule: 
       interval: weekly
-      time: '03:00'
     open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: 'src/svc/gateway-store'
+    schedule:
+      interval: weekly
+  # Gateway (Web)
   - package-ecosystem: gomod
     directory: 'src/svc/gateway-web'
     schedule: 
       interval: weekly
-      time: '03:00'
     open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: 'src/svc/gateway-web'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  # Go Libraries
   - package-ecosystem: gomod
     directory: 'src/svc/pkg'
     schedule: 
       interval: weekly
-      time: '03:00'
     open-pull-requests-limit: 10
