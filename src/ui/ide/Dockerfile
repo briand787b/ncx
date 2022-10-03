@@ -1,5 +1,5 @@
 # build stage
-FROM node:18.9.0 as build-stage
+FROM node:18.10.0 as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
