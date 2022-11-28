@@ -8,7 +8,7 @@ COPY . /go/src/
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -v -o /go/bin/app /go/src/gateway-web/cmd
 
 # RUN STAGE
-FROM alpine:3.16
+FROM alpine:3.17
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 WORKDIR /root
 COPY --from=builder /go/bin/app /root/
