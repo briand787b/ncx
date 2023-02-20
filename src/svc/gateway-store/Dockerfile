@@ -1,5 +1,5 @@
 # NOTE: Docker build context must be set to the svc/ directory
-FROM golang:1.19.4 AS builder
+FROM golang:1.20.1 AS builder
 WORKDIR /go/src/gateway-web
 COPY gateway-web/go.mod gateway-web/go.sum /go/src/gateway-web/
 COPY pkg/go.mod pkg/go.sum /go/src/pkg/
